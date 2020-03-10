@@ -365,7 +365,7 @@ input{
     padding: 0 0 20px;
 }
 
-#expirationReservation{
+#expirationReservation, #annulation-footer, #expiration-footer{
     color: #083b65;
     margin-right: 5px;
     font-size: 18px;

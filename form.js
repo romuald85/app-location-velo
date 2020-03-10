@@ -1,77 +1,114 @@
-class Form{
-    constructor(){
+class Form {
+    constructor() {
+        /** @var {Object} validation bouton de validation du formulaire */
         this.validation = document.getElementById('submit');
+
+        /** @var {Object} close croix de la popup pour la fermer */
+        this.close = document.getElementById('close');
+
+        /** @var {Object} nom input du formulaire */
         this.nom = document.getElementById('last-name');
+
+        /** @var {Object} nomManquant message d'erreur si le nom est manquant */
         this.nomManquant = document.getElementById('missing-last-name');
+
+        /** @var {Object} prenom input du formulaire */
         this.prenom = document.getElementById('first-name');
+
+        /** @var {Object} prenomManquant message d'erreur si le prénom est manquant */
         this.prenomManquant = document.getElementById('missing-first-name');
+
+        /** @var {Object} nomValide expression régulière qui verifie le format du nom */
         this.nomValide = /^[a-zA-ZéèîïÉÈîÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈîÏ][a-zéèêàçîï]+)?/;
+
+        /** @var {Object} prenomValide expression régulière qui vérifie le format du prénom */
         this.prenomValide = /^[a-zA-ZéèîïÉÈîÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈîÏ][a-zéèêàçîï]+)?/;
-        this.numberAvailableBike;
 
-        this.submit();
-        this.hidePopup();
-        this.closePopup();
-       
+        this.init();
     }
 
-    submit(){
+    /**
+     * Initialise les écouteurs d'événement
+     */
+    init() {
         this.validation.addEventListener('click', this.valid.bind(this));
-        this.validation.addEventListener('click', function(e){
-            e.preventDefault();// si l'événement n'est pas traité explicitement, son action par défaut ne doit pas être prise en compte 
-        })
+        this.close.addEventListener('click', this.hidePopup.bind(this));
     }
 
-    hidePopup(){
-        document.getElementById('popup-content').classList.remove('isVisible');
-    }
-
-    closePopup(){
-        document.getElementById('close').addEventListener('click', function(){
-            document.getElementById('popup-content').style.display = 'none';
-            document.getElementById('popup').style.display = 'none';
-        });
-    } 
-
-    valid(e){// Vérification des champs et de la validité des informations entrées au clic sur "réservez"
-        if((this.nom.validity.valueMissing) && (this.prenom.validity.valueMissing)){
-            e.preventDefault();
+    /**
+     * Vérification des champs et de la validité des informations entrées au clic sur "réservez"
+     * @param {Object} e event 
+     */
+    valid(e) {
+        e.preventDefault();
+        if ((this.nom.validity.valueMissing) && (this.prenom.validity.valueMissing)) {
             this.nomManquant.textContent = 'Nom manquant';
             this.nomManquant.style.color = 'red';
             this.prenomManquant.textContent = 'Prenom manquant';
             this.prenomManquant.style.color = 'red';
-            this.hidePopup();
-        }else if(this.nomValide.test(this.nom.value) == false || this.prenomValide.test(this.prenom.value) == false){
-            event.preventDefault();
+        } else if (this.nomValide.test(this.nom.value) == false || this.prenomValide.test(this.prenom.value) == false) {
             this.nomManquant.textContent = 'Format incorrect';
             this.nomManquant.style.color = 'orange';
             this.prenomManquant.textContent = 'Format incorrect';
             this.prenomManquant.style.color = 'orange';
-            this.hidePopup();
-        }else if(this.nomValide.test(this.nom.value) == true || this.prenomValide.test(this.prenom.value) == true){
-            document.getElementById('popup-content').style.display = 'block';
-            document.getElementById('popup').style.display = 'block';
+        } else if (this.nomValide.test(this.nom.value) == true || this.prenomValide.test(this.prenom.value) == true) {
+            this.showPopup();
         }
     }
 
-    setLastName(lastname){
+    /**
+     * Affiche la popup
+     */
+    showPopup(){
+        document.getElementById('popup-content').style.display = 'block';
+        document.getElementById('popup').style.display = 'block';
+    }
+
+    /**
+     * Cache la popup
+     */
+    hidePopup(){
+        document.getElementById('popup-content').style.display = 'none';
+        document.getElementById('popup').style.display = 'none';
+    }
+
+    /**
+     * assigne le nom du client
+     * @param {String} lastname nom du client
+     */
+    setLastName(lastname) {
         document.getElementById('last-name').value = lastname;
     }
 
-    getLastName(){
+    /**
+     * retourne le nom du client
+     * @return {String} 
+     */
+    getLastName() {
         return document.getElementById('last-name').value;
     }
 
-    setFirstName(firstname){
+    /**
+     * assigne le prénom du client
+     * @param {String} firstname prénom du client
+     */
+    setFirstName(firstname) {
         document.getElementById('first-name').value = firstname;
     }
 
-    getFirstName(){
+    /**
+     * retourne le prénom du client
+     * @return {String} 
+     */
+    getFirstName() {
         return document.getElementById('first-name').value;
     }
 
-    setAddress(address){
+    /**
+     * Assigne l'adresse à la balise HTML dans le footer
+     * @param {String} address Adresse de la station
+     */
+    setAddress(address) {
         document.getElementById('addressFooter').innerText = address;
     }
-
 }

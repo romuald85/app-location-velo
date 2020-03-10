@@ -1,85 +1,110 @@
-// Objet signature  ==>  Le canvas
+/**
+ * Objet signature gère le canvas
+ */
 class Signature {
-    // Attributs
     constructor() {
-        this.ecriture = false; // Attribut d'activation de l'écriture
-        this.canvas = document.getElementById("signature"); // Sélection du canvas dans le HTML
-        this.context = null; // Définira le contexte d'utilisation du canvas
-        this.signatureImg = null;
+        /** Attribut d'activation de l'écriture */
+        this.ecriture = false; 
+
+        /** Sélection du canvas dans le HTML */
+        this.canvas = document.getElementById("signature"); 
+
+        /** Bouton de validation de la signature */
+        this.submitBtn = document.getElementById('sig-submitBtn');
+
+        /** Définira le contexte d'utilisation du canvas */
+        this.context = null; 
+
         this.rect;
 
         this.init();
     }
 
-
+    /**
+     * Initialise les écouteurs d'événement
+     */
     init() {
-        // Appel des méthodes sur écrans tactiles
+        /**Appel des méthodes sur écrans tactiles */
         this.canvas.addEventListener("touchstart", this.convertTouchEvent);
         this.canvas.addEventListener("touchmove", this.convertTouchEvent);
         this.canvas.addEventListener("touchend", this.convertTouchEvent);
-        this.canvas.addEventListener("touchend", function () {
-            document.getElementById('sig-submitBtn').style.display = 'block';
-        });
+        this.canvas.addEventListener("touchend", this.showButtonSign);
 
-        // Appel des méthodes sur PC
+        /** Appel des méthodes sur PC */
         this.canvas.addEventListener("mousedown", this.activationDessin.bind(this));
         this.canvas.addEventListener("mousemove", this.deplacementSouris.bind(this));
         this.canvas.addEventListener("mouseup", this.desactivationDessin.bind(this));
-        this.canvas.addEventListener("mouseup", function () {
-            document.getElementById('sig-submitBtn').style.display = 'block';
-        });
+        this.canvas.addEventListener("mouseup", this.showButtonSign.bind(this));
 
-        // Appel de la méthode d'effacement du canvas lors de l'appui sur le bouton "effacer"
+        /** Appel de la méthode d'effacement du canvas lors de l'appui sur le bouton "effacer" */
         document.getElementById("sig-clearBtn").addEventListener("click", (function () {
             this.clearCanvas();
-            document.getElementById('sig-submitBtn').style.display = 'none';
+            this.hideButtonSign();
         }).bind(this));
-        /*document.getElementById("sig-clearBtn").addEventListener("click", this.clearCanvas.bind(this));*/
 
-        // validation de la signature
-        document.getElementById('sig-submitBtn').addEventListener("click", () => {
-            // mise à jour du nombre de vélos disponibles
+        /** validation de la signature */
+        this.submitBtn.addEventListener("click", () => {
+
+            /** mise à jour du nombre de vélos disponibles */
             var nbVelos = document.getElementById('nombre-de-velos');
             nbVelos.value = nbVelos.value - 1;
         });
-
     }
 
-    // Méthode qui traduit l'événement Touch en Évent pour écrans tactiles
+    /**
+     * Affiche le bouton de validation de la signature
+     */
+    showButtonSign(){
+        this.submitBtn.style.display = 'block';
+    }
+
+    /**
+     * Cache le bouton de validation de la signature
+     */
+    hideButtonSign(){
+        this.submitBtn.style.display = 'none';    
+    }
+
+    /** 
+     * Méthode qui traduit l'événement Touch en Évent pour écrans tactiles
+     */
     convertTouchEvent(ev) {
-        let touch, ev_type, mouse_ev;
-        touch = ev.targetTouches[0];// Pointe sur l'élément actuel du DOM
         ev.preventDefault();
+        let touch, ev_type, mouse_ev;
+
+        /** Pointe sur l'élément actuel du DOM */
+        touch = ev.targetTouches[0]; 
         switch (ev.type) {
-            case 'touchstart':// Cela indique qu'un nouveau toucher s'est produit
-                // S'assure qu'un doigt est sur la cible
+            case 'touchstart': /** Cela indique qu'un nouveau toucher s'est produit */
+                /** S'assure qu'un doigt est sur la cible */
                 if (ev.targetTouches.length != 1) {
                     return;
                 }
                 touch = ev.targetTouches[0];
-                ev_type = 'mousedown';// Est déclenché à partir d'un élément lorsqu'on appuie sur le bouton comme la souris
+                ev_type = 'mousedown'; /** Est déclenché à partir d'un élément lorsqu'on appuie sur le bouton comme la souris */
                 break;
-            case 'touchmove':// Est déclenché lorsque le doigt bouge
-                // S'assure qu'un doigt est sur la cible
+            case 'touchmove': /** Est déclenché lorsque le doigt bouge */
+                /** S'assure qu'un doigt est sur la cible */
                 if (ev.targetTouches.length != 1) {
                     return;
                 }
                 touch = ev.targetTouches[0];
-                ev_type = 'mousemove';// Est déclenché à partir d'un élément lorqu'un dispositif comme la souris est déplacé
+                ev_type = 'mousemove'; /** Est déclenché à partir d'un élément lorqu'un dispositif comme la souris est déplacé */
                 break;
-            case 'touchend':// Événement déclenché lorsqu'un utilisateur enlève son doigt de la surface
-                // Sassure que le doigt a été enlever de la cible
+            case 'touchend': /** Événement déclenché lorsqu'un utilisateur enlève son doigt de la surface */
+                /** Sassure que le doigt a été enlever de la cible */
                 if (ev.changedTouches.length != 1) {
                     return;
                 }
                 touch = ev.changedTouches[0];
-                ev_type = 'mouseup';// Est déclenché à partir d'un élément lorque le bouton de la souris est relaché
+                ev_type = 'mouseup'; /** Est déclenché à partir d'un élément lorque le bouton de la souris est relaché */
                 break;
             default:
                 return;
         }
-
-        mouse_ev = document.createEvent("MouseEvents");// Création de l'événement MouseEvents
+ 
+        /** Création de l'événement MouseEvents */
+        mouse_ev = document.createEvent("MouseEvents"); 
         mouse_ev.initMouseEvent(
             ev_type, // Genre de l'événement
             true,
@@ -100,17 +125,20 @@ class Signature {
         this.dispatchEvent(mouse_ev);
     }
 
-    // Méthode qui récupére les coordonnées de l'Élément de pointage (souris, doigt...)
+    /** 
+     * Méthode qui récupére les coordonnées de l'Élément de pointage (souris, doigt...) 
+     */
     getMousePos(event) {
         this.rect = this.canvas.getBoundingClientRect(); // Renvoie la taille d'un élément et sa position relative par rapport à la zone d'affichage
-
         return {
             x: event.clientX - this.rect.left,
             y: event.clientY - this.rect.top
         };
     }
 
-    // Méthode qui détermine le déplacement de l'élément de pointage
+    /** 
+     * Méthode qui détermine le déplacement de l'élément de pointage
+     */
     deplacementSouris(event) {
         this.sourisPosition = this.getMousePos(event); // Coordonnées de l'élément de pointage retourner par la méthode "getMousePos"
         this.positionX = this.sourisPosition.x;
@@ -118,7 +146,9 @@ class Signature {
         this.dessin(this.positionX, this.positionY);
     }
 
-    // Méthode qui permet de dessiner dans le canvas
+    /** 
+     * Méthode qui permet de dessiner dans le canvas
+     */
     dessin(positionX, positionY) {
         this.context = this.canvas.getContext("2d"); // Contexte du canvas
         this.context.lineWidth = 5; // Largeur du tracer
@@ -129,21 +159,26 @@ class Signature {
         }
     }
 
-    // Méthode qui permet de désactiver l'écriture
+    /**
+     *  Méthode qui permet de désactiver l'écriture
+     */
     desactivationDessin() {
         this.ecriture = false; // Désactive l'écriture dans le canvas
     }
 
-    // Méthode qui active et débute l'écriture dans le canvas
+    /** 
+     * Méthode qui active et débute l'écriture dans le canvas
+     */
     activationDessin() {
         this.ecriture = true; // Active l'écriture sur le canvas
         this.context.beginPath(); // Commence un nouveau chemin de dessin
         this.context.moveTo(this.positionX, this.positionY); // Désigne le début du tracer
     }
 
-    // Méthode qui permet d'effacer le canvas
+    /**
+     * Méthode qui permet d'effacer le canvas
+     */
     clearCanvas() {
         this.context.clearRect(0, 0, 800, 200); // Réinitialise le canvas
     }
 }
-
