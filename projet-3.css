@@ -1,0 +1,602 @@
+body,html
+{
+    padding: 0;
+    margin: 0;
+}
+
+header{
+    height: 100px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+}
+
+#header-1{
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+}
+
+.logo{
+    height: 80px;
+    width: 80px;
+}
+
+#span-header-1{
+    padding: 20px;
+    margin-left: 20px;
+}
+
+.titre-header-1{
+    color: #73cd59;
+    font-size: 18px;
+}
+
+.span-h1{
+    display: block;
+    white-space: pre-wrap;
+    color: #083b65;
+}
+
+nav{
+    position: absolute;
+    right: 0;
+    padding: 50px;
+}
+
+a{
+    text-decoration: none;
+    padding: 20px;
+    font-size: 18px;
+}
+
+.nav-map{
+    font-weight: bold;
+    color: #083b65;
+}
+
+.fa-home{
+    color: #083b65;
+}
+
+#carroussel{
+    width: 100%;
+    transition: transform 0.3s;
+    transform: translate3d(0, 0, 0);
+    height: 600px;
+    padding-top: 110px;
+}
+
+#carroussel figure{
+    width: inherit;
+    height: inherit;
+    margin: 0;
+}
+
+#carroussel figure img{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);/*pour redéplacer l'élément de 50% à l'horizontal vers la gauche*/
+}
+
+#carroussel figcaption{
+    position: absolute;
+    color: #fff;
+    background-color: rgba(0, 0, 0 , 0.5);
+    width: 50%;
+    margin-left: 8%;
+    height: 200px;
+    font-size: 30px;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+#carroussel figure:nth-child(1) figcaption{
+    top: 33%;
+    right: 26%;
+    text-align: center;
+}
+
+#carroussel figure:nth-child(2) figcaption{
+    top: 33%;
+    right: 26%;
+    text-align: center;
+}
+
+#carroussel figure:nth-child(3) figcaption{
+    top: 33%;
+    right: 26%;
+    text-align: center;
+}
+
+#carroussel figure:nth-child(4) figcaption{
+    top: 33%;
+    right: 26%;
+    text-align: center;
+}
+
+figcaption{
+    border: #73cd59 solid 1px;
+}
+
+.span-legend{
+    display: block;
+    white-space: pre-wrap;
+}
+
+#pause
+{
+    position: absolute;
+    bottom: 4%;
+    right: 3%;
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    color: #000;
+    border-radius: 50%;
+    box-shadow: 0 15px 35px #3232321a, 0 5px 15px #0000001a;
+    transition: transform 0.3s;
+}
+
+#pause:hover{
+    transform: scale(1.2);
+}
+
+/*#legend-list
+{
+    color: #fff;
+    background-color: #000;
+    margin: 0 auto;
+}*/
+
+.fleche-droite, .fleche-gauche{
+   position: absolute;
+   width: 40px;
+   height: 40px;
+   background: #fff;
+   border-radius: 50%;
+   top: 50%;
+   margin-top: -20px;
+   right: 0px;
+   box-shadow: 0 15px 35px #3232321a, 0 5px 15px #0000001a;
+   cursor: pointer;
+   transition: transform 0.3s;
+}
+
+.fleche-gauche{
+   right: auto;
+}
+
+.fleche-droite:hover, .fleche-gauche:hover{
+    transform: scale(1.2);
+}
+
+.header-2{
+    height: 400px;
+}
+
+.titre-header-2{
+    color: #083b65;
+    font-size: 18px;
+    margin-left: 20px;
+    padding: 20px;
+}
+
+#form{
+    display: flex;
+    flex-direction: row-reverse;
+    background-color:#FAFAFA;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+#formreq{
+     margin-right: 10px;
+}
+
+fieldset{
+    padding:0 20px 20px 20px;
+    margin-bottom:10px;
+    border:1px solid #73cd59;
+}
+
+legend {
+    color: #083b65;
+    font-weight:bold
+}
+
+input{
+    background-color:#FFF3F3;
+    padding:3px;
+    border:1px solid #d7f7cd;
+    border-radius:5px;
+    width:300px;
+    box-shadow:1px 1px 2px #C0C0C0 inset;
+}
+
+.input{
+    text-align: center;
+}
+
+.titre-form, label{
+    color: #083b65;
+}
+
+#submit{
+    width: 80%;
+    margin-left: 30px;
+    margin-right: 30px;
+    box-shadow:1px 1px 1px #73cd59;
+    background-color: #FFF3F3;
+    border-radius:5px;
+    border:1px solid #73cd59;
+    color: #083b65;
+}
+
+#impossible-de-reserver{
+    display: none;
+    width: 80%;
+    margin-left: 30px;
+    margin-right: 30px;
+    background-color: #d63032;
+    border-radius:5px;
+    border:1px solid #73cd59;
+    color: #fff;
+    text-align: center;
+}
+
+#map{
+    position: absolute;
+    width: 1130px;
+    height: 667px;
+    left: 0;
+    z-index: 2;
+    border: solid 1px #73cd59;
+    margin-left: 11px;
+    margin-top: 9px;
+}
+
+#signature{
+    border: 2px solid #73cd59;
+    /* margin-left: 95px; */
+}
+
+#popup{
+    display: none;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 1600px;
+    background: rgba(70, 73, 82,0.7);
+    z-index: 6500;
+}
+
+#popup-content{
+    border: solid 1px #73cd59;
+    display: none;
+    position: relative;
+    width: 500px;
+    position: fixed;
+    padding: 10px;
+    left: 50%;
+    margin-left: -270px;
+    height: 280px;
+    top: 50%;
+    margin-top: -100px;
+    background: #FFF;
+    z-index: 20;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#close{
+    position: absolute;
+    top: 0;
+    right: 14px;
+    font-size: 30px;
+    transform: rotate(45deg);
+    cursor: pointer;
+    color: #083b65;
+}
+
+.subtitle{
+    color: #083b65;
+}
+
+.col-md-12{
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 30px 5px;
+}
+
+#sig-clearBtn{
+    box-shadow:1px 1px 1px #73cd59;
+    background-color: #FFF3F3;
+    border-radius:5px;
+    border:1px solid #73cd59;
+    color: #083b65;
+    margin: 0px 15px;
+    padding-top: 0;
+    height: 1px;
+}
+
+#sig-submitBtn{
+    display: none;
+    box-shadow:1px 1px 1px #73cd59;
+    background-color: #FFF3F3;
+    border-radius:5px;
+    border:1px solid #73cd59;
+    color: #083b65;
+    padding-top: 0;
+    height: 1px;
+}
+
+#sectionLocation{
+    /* display: none; */
+    border: #73cd59 solid 1px;
+    margin: 5px 12px 10px 10px;
+}
+
+#titre-footer h1{
+    color: #083b65;
+    font-size: 18px;
+    margin-left: 20px;
+    padding: 20px;
+}
+
+#addressFooter{
+  color: #083b65;
+  font-size: 18px;
+  font-weight: bold;
+}
+#NomStationFooter{
+  color: #083b65;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#container-footer{
+    display: flex;
+    justify-content: space-around;
+    padding: 0 0 20px;
+}
+
+#expirationReservation{
+    color: #083b65;
+    margin-right: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#annulation{
+    box-shadow: 1px 1px 1px #73cd59;
+    background-color: #FFF3F3;
+    border-radius:5px;
+    border:1px solid #73cd59;
+    color: #083b65;
+}
+
+@media screen and (max-width: 1024px){
+    #map{
+        width: 635px;
+    }
+
+    #carroussel figure:nth-child(1) figcaption, #carroussel figure:nth-child(2) figcaption, #carroussel figure:nth-child(4) figcaption{
+        height: 250px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    #map{
+        width: 380px;
+    }
+
+    #carroussel{
+        height: 80%;
+    }
+
+    #carroussel figure img{
+        height: 80%;
+    }
+}
+
+@media screen and (max-width: 450px){
+    #header-1{
+        position: static;
+        height: 50px;
+    }
+
+    .titre-header-1{
+        margin-top: 115px;
+        font-size: 28px;
+    }
+
+    .logo{
+        margin-top: 100px;
+        height: 90px;
+        width: 90px;
+    }
+
+    nav{
+        display: none;
+    }
+
+    .home, .nav-map{
+        display: none;
+    }
+
+
+    h2, .span-legend{
+        font-size: 16px;
+    }
+    #carroussel figure:nth-child(1) figcaption, #carroussel figure:nth-child(2) figcaption, #carroussel figure:nth-child(4) figcaption{
+        height: 100px;
+    }
+
+    #carroussel figure:nth-child(2) figcaption{
+        height: 130px;
+    }
+
+    #carroussel figure:nth-child(3) figcaption{
+        height: 70px;
+        margin-top: 70px;
+    }
+
+    #carroussel figure:nth-child(1) figcaption, #carroussel figure:nth-child(2) figcaption, #carroussel figure:nth-child(4) figcaption{
+        margin-top: 50px;
+    }
+
+    .fleche-droite{
+        height: 35px;
+        width: 35px;
+        margin-top: 25px;
+    }
+
+    .fleche-gauche{
+        margin-top: 25px;
+    }
+
+    #pause{
+        height: 50px;
+        width: 50px;
+    }
+
+    #map{
+        width: 385px;
+        margin-top: -800px;
+    }
+
+    #form{
+        height: 1550px;
+        flex-direction: column-reverse;
+    }
+
+    #formreq{
+        margin-left: 10px;
+    }
+
+    #popup{
+        height: 290%;
+    }
+
+    #popup-content{
+        max-width: 353px;
+        margin-left: -188px;
+    }
+
+    .subtitle{
+        text-align: center;
+    }
+
+    #annulation{
+        margin-top: 40px;
+        margin-right: 10px;
+    }
+
+    #expirationReservation{
+        font-size: 16px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 375px){
+    #header-1{
+        position: static;
+        height: 50px;
+    }
+
+    .titre-header-1{
+        margin-top: 115px;
+        font-size: 28px;
+    }
+
+    .logo{
+        margin-top: 100px;
+        height: 90px;
+        width: 90px;
+    }
+
+    nav{
+        display: none;
+    }
+
+    .home, .nav-map{
+        display: none;
+    }
+
+    h2, .span-legend{
+        font-size: 16px;
+    }
+    #carroussel figure:nth-child(1) figcaption, #carroussel figure:nth-child(2) figcaption, #carroussel figure:nth-child(4) figcaption{
+        height: 100px;
+    }
+
+    #carroussel figure:nth-child(2) figcaption{
+        height: 130px;
+    }
+
+    #carroussel figure:nth-child(3) figcaption{
+        height: 70px;
+        margin-top: 70px;
+    }
+
+    #carroussel figure:nth-child(1) figcaption, #carroussel figure:nth-child(2) figcaption, #carroussel figure:nth-child(4) figcaption{
+        margin-top: 50px;
+    }
+
+    .fleche-droite{
+        height: 35px;
+        width: 35px;
+        margin-top: 25px;
+    }
+
+    .fleche-gauche{
+        margin-top: 25px;
+    }
+
+    #pause{
+        height: 50px;
+        width: 50px;
+    }
+
+    #map{
+        width: 353px;
+        margin-top: -800px;
+    }
+
+    #form{
+        height: 1550px;
+        flex-direction: column-reverse;
+    }
+
+    #formreq{
+        margin-left: 10px;
+    }
+
+    #popup{
+        height: 290%;
+    }
+
+    #popup-content{
+        max-width: 353px;
+        margin-left: -188px;
+    }
+
+    .subtitle{
+        text-align: center;
+    }
+
+    #annulation{
+        margin-top: 40px;
+        margin-right: 10px;
+    }
+
+    #expirationReservation{
+        font-size: 16px;
+        text-align: center;
+    }
+}

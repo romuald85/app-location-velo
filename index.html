@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="projet-3.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+    <script src="https://kit.fontawesome.com/d522b5a026.js"></script>
+    <title>rent-bike</title>
+</head>
+
+<body>
+    <header id="header-1">
+        <span id="span-header-1"><img class="logo" src="images/logo.png" alt="" /></span>
+        <h1 class="titre-header-1">Application<span class="span-h1">vélo location</span></h1>
+        <nav>
+            <a href="#carroussel" class="home"><i class="fas fa-home"></i></a>
+            <a href="#map" class="nav-map">Carte</a>
+        </nav>
+    </header>
+    <div id="carroussel">
+        <figure>
+            <img src="images/1.jpeg" alt="" />
+            <figcaption class="figcaption-1">
+                <h2>Choisissez votre station sur la carte</h2><span class="span-legend">Cliquez sur le marqueur de votre choix</span>
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="images/2.jpeg" alt="" />
+            <figcaption class="figcaption-2">
+                <h2>Entrez votre nom et prénom</h2><span class="span-legend">En vérifiant le statut de la station et la disponibilté des vélos</span>
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="images/3.jpeg" alt="" />
+            <figcaption>
+                <h2>Signez et validez votre réservation</h2>
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="images/4.jpeg" alt="" />
+            <figcaption>
+                <h2>Réservation terminée</h2><span class="span-legend">Votre réservation expirera dans 20 minutes</span>
+            </figcaption>
+        </figure>
+    </div>
+    <header id="header-2"><span id="span-header-2"></span>
+        <h1 class="titre-header-2">Réservez votre vélo !</h1>
+    </header>
+    <div id="form">
+        <form id="formreq">
+            <fieldset>
+                <legend>Détails de la station</legend>
+                <p class="input"><span class="titre-form">Nom de la station:</span></p>
+                <p class="input"><input id="nom-de-station" type="text" name="nom-de-station" readonly></p>
+                <p class="input"><span class="titre-form">Adresse:</span></p>
+                <p class="input"><input id="adresse" type="text" name="adresse" readonly></p>
+                <p class="input"><span class="titre-form">Statut:</span></p>
+                <p class="input"><input id="statut" type="text" name="statut" readonly></p>
+                <p class="input"><span class="titre-form">Vélos disponibles:</span></p>
+                <p class="input"><input id="nombre-de-velos" type="text" name="nombre-de-velos" readonly></p>
+                <p class="input"><span class="titre-form">Places disponibles</span></p>
+                <p class="input"><input id="nombre-de-place-dispo" type="text" name="nombre-de-place-dispo" readonly>
+                </p>
+            </fieldset>
+            <fieldset>
+                <legend>Votre nom et prénom</legend>
+                <p class="input"><label for="last-name">Nom* :</label></p>
+                <p class="input"><input id="last-name" class="text-area" type="text" placeholder="Nom" required></p>
+                <p class="input"><span id="missing-last-name" class="error-message"></span></p>
+                <p class="input"><label for="first-name">Prénom* :</label></p>
+                <p class="input"><input id="first-name" class="text-area" type="text" placeholder="Prénom" required></p>
+                <p class="input"><span id="missing-first-name" class="error-message"></span></p>
+                <p class="input"><button id="submit">Réservez</button></p><span id="impossible-de-reserver">Impossible de réserver</span>
+            </fieldset>
+        </form>
+        <div id="map"></div>
+    </div>
+    <div id="popup">
+        <div id="popup-content" class="isVisible">
+            <div id="close">+</div>
+            <h3 class="subtitle">Confirmation de réservation:</h3>
+            <canvas id="signature"></canvas>
+            <div class="col-md-12">
+                <a class="btn btn-primary" id="sig-submitBtn" href="#sectionLocation">Valider</a>
+                <a class="btn btn-default" id="sig-clearBtn">Effacer</a>
+            </div>
+        </div>
+    </div>
+    <footer id="sectionLocation" style="display: none;">
+        <div id="titre-footer" style="display: none;">
+            <h1>Location en cours</h1>
+        </div>
+        <div id="container-footer" style="display: none;">
+            <p id="expirationReservation">Votre réservation expirera dans : <span id="compteur" class="timer"></span>&nbsp;minutes(s)...</p>
+            <p id="NomStationFooter">Nom de la station : <span id="addressFooter"></span></p>
+            <p><button id="annulation">Annuler la réservation</button></p>
+        </div>
+        <div id="annulation-footer" style="display: none;">
+            <p>Réservation annulée</p>
+        </div>
+        <div id="expiration-footer" style="display:none;">
+            <p>Réservation expirée</p>
+        </div>
+    </footer>
+    <script src="storage.js"></script>
+    <script src="slide.js"></script>
+    <script src="ajax.js"></script>
+    <script src="map.js"></script>
+    <script src="form.js"></script>
+    <script src="signature.js"></script>
+    <script src="countdown.js"></script>
+    <script src="locationInfos.js"></script>
+</body>
+</html>
