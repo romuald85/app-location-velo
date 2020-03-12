@@ -1,3 +1,6 @@
+/**
+ * Carte dynamique provenant du système de cartographie LeafletJS (API), gère aussi les données de JC Decaux (API)
+ */
 class Map {
   constructor() {
     this.map = this.initMap();
@@ -9,21 +12,31 @@ class Map {
     });
   }
 
+  /**
+   * initialise la carte via l'API Leaflet
+   */
   initMap() {
-    let map = L.map('map').setView([45.750000, 4.850000], 12); //initialise la carte à une position donnée
+    let map = L.map('map').setView([45.750000, 4.850000], 12); //initialise la position de la carte et un niveau de zoom
     L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=jXE1OGVV9TKZEJe3LoeF', {
       attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
     }).addTo(map); //configuration de la carte
     return map;
   }
 
+  /**
+   * Met à jour tous les marqueurs
+   * @param {Object} stations liste de station au format JSON
+   * @param {Object} map represente la carte
+   * @param {Object} markers tableau de markers
+   */
   refreshMarkersMap(stations, map, markers) {
     this.removeMarkers(markers);
     this.addMarkers(stations, map, markers);
   }
 
   /**
-   * removeMarkers supprime les marqueurs
+   * Supprime tous les marqueurs de la carte
+   * @param {Object} markers tableau des markers de la carte 
    */
   removeMarkers(markers) {
     for (let i = 0; i < markers.length; i++) {
@@ -31,11 +44,17 @@ class Map {
     }
   }
 
+  /**
+   * Ajoute un marker pour chaque poition de station à la carte
+   * @param {Object} stations liste de station au format JSON
+   * @param {Object} map represente la carte
+   * @param {Object} markers tableau de markers
+   */
   addMarkers(stations, map, markers) {
-    for (let i = 0; i < stations.length; i++) {
-      markers[i] = L.marker(
-        [stations[i].position.lat, stations[i].position.lng], {
-          title: stations[i].name,
+    for (let i = 0; i < stations.length; i++) {// boucle sur chaque stations 
+      markers[i] = L.marker(//affect a un markeur du tableau, un marqueur de la carte, qui correspont a une station
+        [stations[i].position.lat, stations[i].position.lng], {// assigne au marqueur en cours la position de la station en cours
+          title: stations[i].name,// assigne au marqueur en cours le nom de la station en cours comme titre
         }
       ).addTo(map);
       markers[i].on('click', function () {
