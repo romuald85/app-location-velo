@@ -169,14 +169,3 @@ class LocationInfos {
     }
   }
 }
-
-/** @var {number} duration 1200000 millisecondes équivaut à 20 minutes */
-var duration = 1200000; 
-
-var newStorage = new Storage();
-var countdown = new Countdown(LocationInfos.showExpired, duration);
-var formulaire = new Form();
-var locationInfos = new LocationInfos();
-var signature = new Signature();
-
-locationInfos.loadRentInProgress();

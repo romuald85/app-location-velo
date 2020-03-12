@@ -65,7 +65,3 @@ class Map {
     }
   }
 }
-
-window.addEventListener('DOMContentLoaded', (event) => {
-  myMap = new Map();
-});

@@ -183,7 +183,3 @@ class Slide {
         }
     }
 }
-
-window.addEventListener('DOMContentLoaded', (event) => {
-    const monSlider = new Slide('carroussel');
-});
