@@ -35,8 +35,8 @@ class LocationInfos {
    */
   static showExpired() {
     LocationInfos.hideLocationInfo();
-    this.showsectionLoc();
-    this.expirationFooter.style.display = 'block';
+    LocationInfos.showsectionLoc();
+    LocationInfos.expirationFooter.style.display = 'block';
   }
 
   /**
@@ -44,8 +44,8 @@ class LocationInfos {
    */
   static showAnnulation() {
     LocationInfos.hideLocationInfo();
-    this.showsectionLoc();
-    this.annulationFooter.style.display = 'block';
+    LocationInfos.showsectionLoc();
+    LocationInfos.annulationFooter.style.display = 'block';
   }
 
   /**
@@ -54,9 +54,9 @@ class LocationInfos {
   static showLocationInfo() {
     LocationInfos.hideLocationInfo();
     document.getElementById('popup').style.display = 'none';
-    this.showsectionLoc();
-    this.titreFooter.style.display = 'block';
-    this.containerFooter.style.display = 'flex';
+    LocationInfos.showsectionLoc();
+    LocationInfos.titreFooter.style.display = 'block';
+    LocationInfos.containerFooter.style.display = 'flex';
     document.querySelector('#addressFooter').innerText = document.querySelector('#nom-de-station').value;
   }
 
@@ -64,15 +64,15 @@ class LocationInfos {
    * Cache les informations de la location
    */
   static hideLocationInfo() {
-    this.titreFooter.style.display = 'none';
-    this.containerFooter.style.display = 'none';
-    this.expirationFooter.style.display = 'none';
-    this.annulationFooter.style.display = 'none';
-    this.sectionLocation.style.display = 'none';
+    LocationInfos.titreFooter.style.display = 'none';
+    LocationInfos.containerFooter.style.display = 'none';
+    LocationInfos.expirationFooter.style.display = 'none';
+    LocationInfos.annulationFooter.style.display = 'none';
+    LocationInfos.sectionLocation.style.display = 'none';
   }
 
   static showsectionLoc(){
-    this.sectionLocation.style.display = 'block';
+    LocationInfos.sectionLocation.style.display = 'block';
   }
 
   /**
